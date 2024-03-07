@@ -1,4 +1,4 @@
-<title>Cities - MasterBoard</title>
+<title>City - MasterBoard</title>
 @include('layout.header')
 <link rel="stylesheet" href="{{ asset('assets2/bundles/datatables/datatables.min.css') }}">
 <link rel="stylesheet"
