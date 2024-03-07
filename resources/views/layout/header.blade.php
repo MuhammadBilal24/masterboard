@@ -106,12 +106,7 @@
                             </a>
                             <div class="collapse" id="ui-basic">
                                 <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Account</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Account Type</a>
-                                    </li>
-                                    <li class="nav-item"> <a class="nav-link" href="/city">City</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="/category">Category</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Product</a></li>
+                                  <li class="nav-item"> <a class="nav-link" href="/category">Category</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -160,12 +155,7 @@
                             </a>
                             <div class="collapse" id="ui-basic">
                                 <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Account</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Account Type</a>
-                                    </li>
-                                    <li class="nav-item"> <a class="nav-link" href="/city">City</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="/category">Category</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Product</a></li>
+                                  <li class="nav-item"> <a class="nav-link" href="/category">Category</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -211,20 +201,8 @@
                             </a>
                             <div class="collapse" id="ui-basic">
                                 <ul class="nav flex-column sub-menu">
-                                    @if ($customizing->where('title', 'Accounts')->first()?->value === '1')
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Accounts</a></li>
-                                    @endif
-                                    @if ($customizing->where('title', 'AccountType')->first()?->value === '1')
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Account Type</a></li>
-                                    @endif
-                                    @if ($customizing->where('title', 'City')->first()?->value === '1')
-                                    <li class="nav-item"> <a class="nav-link" href="/city">City</a></li>
-                                    @endif
                                     @if ($customizing->where('title', 'Category')->first()?->value === '1')
                                     <li class="nav-item"> <a class="nav-link" href="/category">Category</a></li>
-                                    @endif
-                                    @if ($customizing->where('title', 'Product')->first()?->value === '1')
-                                    <li class="nav-item"> <a class="nav-link" href="typography.html">Product</a></li>
                                     @endif
                                 </ul>
                             </div>

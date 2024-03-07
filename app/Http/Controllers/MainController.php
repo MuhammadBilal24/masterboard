@@ -46,34 +46,7 @@ class MainController extends Controller
             ]);
         //   return response()->json($data);  
     }
-    // City
-    public function cityPage()
-    {
-        $data['cityData']= DB::table('city')->get();
-        return view('city' , $data);
-    }
-    public function cityInsert(request $request)
-    {
-        $city = $request->input('city');
-        $data = array(
-            'city' => $request->city,
-        );
-        DB::table('city')->insert($data);
-        return response()->json([
-            'status'=>200,
-            'messages'=>'New City Insert',
-        ]);
-    }
-    public function cityDelete(request $request)
-    {
-        DB::table('city')->where(['id'=>$request->id])->delete();
-        return response()->json([
-            'status'=>200,
-            'messages'=>'City Deleted',
-        ]);
-    }
-    // City End
-
+    
     // Category
     public function categoryPage()
     {
