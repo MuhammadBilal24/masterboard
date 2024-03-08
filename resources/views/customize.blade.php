@@ -1,9 +1,5 @@
 <title>Customize - MasterBoard</title>
 @include('layout.header')
-<link rel="stylesheet" href="{{ asset('assets2/bundles/datatables/datatables.min.css') }}">
-<link rel="stylesheet"
-    href="{{ asset('assets2/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets2/css/components.css') }}">
 <style>
     .input1 {
         border: 1px solid black;
@@ -28,8 +24,8 @@
                                 </div>
                             </h4>
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableExport" style="width:100%;">
-                                    <thead>
+                                <table class="table table-hover" id="table" style="width:100%;">
+                                    <thead style="background: rgb(221, 221, 221)">
                                         <tr>
                                             <th>#</th>
                                             <th>Title</th>
@@ -70,7 +66,6 @@
         <div class="alert alert-danger">This Page is Blocked For Managers and Employees.</div>
     @endif
 
-    <!-- content-wrapper ends -->
     @include('layout.footer')
 
     <!-- Add Modal -->
@@ -86,12 +81,13 @@
                         @csrf
                         <label for="">Title</label>
                         <input type="text" id="title" name="title" class="form-control input1" required><br>
-                        <label for="" class="">Hide / Show</label>
+                        <label for="" class="">Status</label>
                         <div class="form-switch">
                             <input class="form-check-input" name="value" type="checkbox" data-bs-toggle="toggle"
                                 data-on="1" data-off="0" data-on-style="success" data-off-style="danger"
                                 id="valuecheck" value="0" />
                             <input type="text" name="" id="value" value="0" hidden>
+                            <label for=""> Hide / Show</label>
                         </div>
                         <br>
                         <div class="modal-footer">
@@ -112,20 +108,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form-group" id="customize_Editform">
+                    <form action="/update/customize" method="post" class="form-group" id="customize_Editform">
                         @csrf
                         <input type="text" name="id" id="cid" hidden>
                         <label for="">Title</label>
-                        <input type="text" id="titleEdit" name="title" class="form-control input1" readonly><br>
-                        <label for="" class="">Hide / Show</label>
+                        <input type="text" id="titleEdit" name="title" class="form-control input1"
+                            readonly><br>
+                        <label for="value">Status</label>
                         <div class="form-switch">
-                            <input class="form-check-input" type="checkbox" data-bs-toggle="toggle"
-                                data-on="1" data-off="0" data-on-style="success" data-off-style="danger"
-                                id="valueEdit" value="1" name="value" checked />
                             <input class="form-check-input" name="value" type="checkbox" data-bs-toggle="toggle"
                                 data-on="1" data-off="0" data-on-style="success" data-off-style="danger"
-                                id="valueEdit2" value="0" />
-                            <input type="text" name="" id="value2" value="">
+                                id="valueEdit" value="" />
+                            <input type="text" name="value" id="value2" value="" hidden>
+                            <label for=""> Hide / Show</label>
                         </div>
                         <br>
                         <div class="modal-footer">
@@ -191,12 +186,12 @@
                 $('#valueEdit').val(res.value);
                 if (res.value == 1) {
                     $('#value2').val('1');
-                    $('#valueEdit').show();
-                    $('#valueEdit2').hide();
+                    $('#valueEdit').val('1');
+                    $('#valueEdit').prop('checked', $('#valueEdit').val() == 1).change();
                 } else {
                     $('#value2').val('0');
-                    $('#valueEdit').hide();
-                    $('#valueEdit2').show();
+                    $('#valueEdit').show();
+                    $('#valueEdit').prop('', $('#valueEdit').val() == 0).change();
                 }
             });
             $('#valueEdit').change(function() {
@@ -207,27 +202,28 @@
                     $('#value2').val('0');
                 }
             })
-            $('#valueEdit2').change(function() {
-                if ($(this).prop('checked')) {
-                    $('#value2').val('1');
-                    $('#valueEdit2').val('1');
-                } else {
-                    $('#value2').val('0');
+        })
+        // Update Customize Modal
+        $('#updatebtn').click(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var id = $('#cid').val();
+            var titleEdit = $('#titleEdit').val();
+            var valueEdit = $('#valueEdit').val();
+            $.ajax({
+                type: "post",
+                url: "{{ route('customize.update') }}",
+                data: {
+                    id: id,
+                    titleEdit: titleEdit,
+                    valueEdit: valueEdit,
+                },
+                success: function(response) {
+                    console.log(response);
                 }
             });
         })
-        // Update Customize Modal
-        $('#customize_Editform').submit(function(){
-            var id = $('#cid').val();
-            $.ajax({
-                url:'customize/Update/'+ id,
-                method:'post',
-                data:{id:id, _token:'{{ csrf_token() }}'},
-                dataType:'json',
-                success: function(res)
-                {
-                    console.log(res);
-                }
-            })
-        });
     </script>

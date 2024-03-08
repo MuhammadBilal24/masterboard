@@ -67,8 +67,7 @@ Route::group(['middleware' => ['LoginCheck']], function()
 Route::post('customize/Insert',[MainController::class,'customizeInsert']);
 // Route::post('customize/Edit/{id}',[MainController::class,'customizeEdit']);
 Route::match(['get', 'post'], 'customize/Edit/{id}', [MainController::class, 'customizeEdit']);
-Route::match(['get', 'post'], 'customize/Update/{id}', [MainController::class, 'customizeUpdate']);
-
+Route::post('/update/customize', [MainController::class, 'customizeUpdate'])->name('customize.update');
 
 // Trash Permenantly Deleted
 Route::match(['get', 'post'], '/expencePermenantDeleteExpense/{id}', [MainController::class, 'permenantTrashDeleteExpense']);

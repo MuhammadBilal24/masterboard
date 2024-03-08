@@ -42,9 +42,10 @@ class MainController extends Controller
         DB::table('customize')->where(['id'=>$request->id])->
         update([
                 'id'=> $request->id,
+                'title'=>$request->title,
                 'value' => $request->value,
             ]);
-        //   return response()->json($data);  
+          return back(); 
     }
     
     // Category
